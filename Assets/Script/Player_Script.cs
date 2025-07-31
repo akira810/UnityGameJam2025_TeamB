@@ -3,34 +3,47 @@
 //
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Player_Script : MonoBehaviour
 {
+    Vector3 moveSpeed = Vector3.zero;
+
     
-    float horizontal = 0.0f;
-    float moveSpeed = 0.0f;
     // Start is called before the first frame update
     void Start()
     {
-        
+        InitCube();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        MoveCube();        
     }
 
     public void InitCube()
     {
-        
-        horizontal = 0.0f;
-        moveSpeed = 3.0f;
+        moveSpeed.x = 10.0f;
+        moveSpeed.y = 10.0f;        
     }
 
+    //ÉvÉåÉCÉÑÅ[ÇÃà⁄ìÆ
     public void MoveCube()
     {
-        
+        moveSpeed.y = Input.GetAxis("Vertical");
+        moveSpeed.x = Input.GetAxis("Horizontal");
+
+        transform.Translate(Vector3.up * moveSpeed.y * Time.deltaTime);
+        transform.Translate(Vector3.right * moveSpeed.x * Time.deltaTime);
+
+        //position.y = transform.position.y;
+        //position.x = transform.position.x;
+
     }
+    
+
+    
 }
