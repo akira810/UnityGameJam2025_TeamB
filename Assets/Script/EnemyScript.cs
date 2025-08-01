@@ -8,27 +8,26 @@ public class EnemyScript : MonoBehaviour
 {
     Vector2 startPosition = Vector2.zero;
     float moveSpeed = 0.0f;
-    float downs = 0.0f;
-    float ups= 0.0f;
-    float genkaiy = 403f;
-    float genkaix = 680f;
-    int myStatus = 0;
+    float downs = -400.0f;
+    float ups = 400.0f;
+    float genkaiy = -670f;
+    float genkaix = 670f;
 
     bool frag = false;
 
     float EnemyHp = 100.0f;
-    float EnemyAtk = 100.0f; 
+    float EnemyAtk = 100.0f;
     void Start()
     {
         Camera.main.transform.position = startPosition;
-        startPosition -= Vector2.down * 1.5f*Time.deltaTime;
-      
+        startPosition -= Vector2.down * 1.5f * Time.deltaTime;
+
         moveSpeed = 2.5f;
         downs = -6.5f;
         ups = 6.5f;
     }
     void Update()
-    {        
+    {
         float time = Time.deltaTime * 60;
         //3•b‚ğ‰ß‚¬‚½‚ç‘¬“x‚ğ•Ï‚¦‚é
         if (time > 3.0f)
@@ -39,26 +38,6 @@ public class EnemyScript : MonoBehaviour
         {
             moveSpeed = moveSpeed * 1;
         }
-           //myStatus‚É‚æ‚Á‚Ä”»’f•ªŠò
-            switch (myStatus)
-            
-            {
-                case 0:
-
-                    break;
-
-                case 1:
-
-                    break;
-
-                case 2:
-
-                    break;
-
-                default:
-
-                    break;
-            }
         InitCube();
         MoveCube();
     }
@@ -73,6 +52,7 @@ public class EnemyScript : MonoBehaviour
     //Cube‚ª“™‘¬ˆÚ“®‚·‚é
     void MoveCube()
     {
+        float time = Time.deltaTime * 60;
         if (transform.position.x <= -100)
         {
             if (frag == false)
@@ -91,12 +71,12 @@ public class EnemyScript : MonoBehaviour
                 transform.Translate(Vector2.up * moveSpeed * Time.deltaTime);
                 transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
 
-                if (transform.position.y >= ups)
+                if (transform.position.y >= ups)//
                 {
                     frag = false;
                 }
             }
-            if (transform.position.x<=-403)
+            if (time >= 6)//•b”‚ª6•bˆÈã‚½‚Á‚½‚ç
             {
                 Destroy(gameObject);//©g‚ğÁ‚·
             }
