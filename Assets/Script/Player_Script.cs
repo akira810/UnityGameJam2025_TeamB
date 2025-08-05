@@ -7,9 +7,11 @@ using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+
+
 public class Player_Script : MonoBehaviour
 {
-
+    
 
     public float moveSpeed = 0.0f;
     float stickLx = 0.0f;
@@ -25,12 +27,7 @@ public class Player_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveCube();      
-        
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            
-        }
+        MoveCube();
     }
 
     public void InitCube()
@@ -47,4 +44,9 @@ public class Player_Script : MonoBehaviour
         transform.Translate(Vector3.up * stickLy * moveSpeed * Time.deltaTime);
         transform.Translate(Vector3.right * stickLx * moveSpeed * Time.deltaTime);
     }    
+
+    public void InitStatus()
+    {
+        
+    }
 }
