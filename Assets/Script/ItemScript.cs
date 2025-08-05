@@ -7,7 +7,7 @@ public class ItemScript : MonoBehaviour
     [SerializeField] GameObject player;
     Player_Script playerScript;
 
-    float moveSpeed = 0.0f;
+    public float moveSpeed = 0.0f;
     Vector3 firstPos = Vector3.zero;
     // Start is called before the first frame update
     void Start()
@@ -16,23 +16,24 @@ public class ItemScript : MonoBehaviour
 
         float randomPos = Random.Range(6.0f , 6.0f);
         firstPos = new Vector3( 20.0f,randomPos,0.0f);
-        transform.position = firstPos;
-
-        moveSpeed = 3.0f;
-        
+        transform.position = firstPos;                
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
-
-        
+        MoveItem();
+          
 
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         Destroy(gameObject);
+    }
+
+    public void MoveItem()
+    {
+        transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
     }
 }
