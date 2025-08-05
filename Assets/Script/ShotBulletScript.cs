@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NormalBullet_Script : MonoBehaviour
+public class ShotBulletScript : MonoBehaviour
 {
     [SerializeField] GameObject newBullet;
 
@@ -10,11 +10,13 @@ public class NormalBullet_Script : MonoBehaviour
     Player_Script playerScript;
 
     Vector3 firstPos;
+    public GameObject bullet;
+    public List<GameObject> bulletList = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
-        playerScript = GetComponent<Player_Script>();
+        playerScript = player.GetComponent<Player_Script>();
 
         
     }
@@ -26,8 +28,8 @@ public class NormalBullet_Script : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.J))
         {
-            Instantiate(newBullet , firstPos, transform.rotation);
-
+            bullet = Instantiate(newBullet , firstPos, transform.rotation);
+            bulletList.Add(bullet);
 
         }
     }
