@@ -9,7 +9,11 @@ using UnityEngine.UIElements;
 
 public class Player_Script : MonoBehaviour
 {
-    Vector3 moveSpeed = Vector3.zero;
+
+
+    public float moveSpeed = 0.0f;
+    float stickLx = 0.0f;
+    float stickLy = 0.0f;
 
     
     // Start is called before the first frame update
@@ -21,29 +25,26 @@ public class Player_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveCube();        
+        MoveCube();      
+        
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            
+        }
     }
 
     public void InitCube()
     {
-        moveSpeed.x = 10.0f;
-        moveSpeed.y = 10.0f;        
+              
     }
 
     //プレイヤーの移動
     public void MoveCube()
     {
-        moveSpeed.y = Input.GetAxis("Vertical");
-        moveSpeed.x = Input.GetAxis("Horizontal");
+        stickLy = Input.GetAxis("Vertical");//Lスティックのy軸
+        stickLx = Input.GetAxis("Horizontal");//Lスティックのx軸
 
-        transform.Translate(Vector3.up * moveSpeed.y * Time.deltaTime);
-        transform.Translate(Vector3.right * moveSpeed.x * Time.deltaTime);
-
-        //position.y = transform.position.y;
-        //position.x = transform.position.x;
-
-    }
-    
-
-    
+        transform.Translate(Vector3.up * stickLy * moveSpeed * Time.deltaTime);
+        transform.Translate(Vector3.right * stickLx * moveSpeed * Time.deltaTime);
+    }    
 }
