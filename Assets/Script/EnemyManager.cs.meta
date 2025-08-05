@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< Updated upstream:Assets/Script/ItemScript.cs.meta
+guid: 77621375975ae7a45857f62a0d3dd939
+========
+guid: f60c641fe41b1134cb04410afe02d1d7
+>>>>>>>> Stashed changes:Assets/Script/EnemyManager.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
