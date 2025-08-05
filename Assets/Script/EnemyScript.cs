@@ -29,7 +29,7 @@ public class EnemyScript : MonoBehaviour
     void Update()
     {
         MoveEnemy();
-        ManageState();       
+        ManageState(); 
     }
 
     void OnCollisionEnter(Collision collision)
