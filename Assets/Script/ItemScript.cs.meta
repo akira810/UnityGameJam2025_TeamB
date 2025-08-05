@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Script/ItemScript.cs.meta
 guid: a35c5940024cd3c448337fa392135a1e
+========
+guid: 852c97f615f8cb74480aab7f687c7635
+>>>>>>>> d3e4268 (Bulletの追加):Assets/Script/BulletScript.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

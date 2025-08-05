@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-<<<<<<<< Updated upstream:Assets/Script/ItemScript.cs.meta
-guid: 77621375975ae7a45857f62a0d3dd939
+<<<<<<<< HEAD:Assets/Script/ItemScript.cs.meta
+guid: 97202e51a83b56c499411a133a7c8036
 ========
-guid: f60c641fe41b1134cb04410afe02d1d7
->>>>>>>> Stashed changes:Assets/Script/EnemyManager.cs.meta
+guid: 852c97f615f8cb74480aab7f687c7635
+>>>>>>>> d3e4268 (Bulletの追加):Assets/Script/BulletScript.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
