@@ -10,21 +10,22 @@ public class EnemyScript : MonoBehaviour
     
    int EnemyState = 0;
     float EnemyHp = 100.0f;
-    public GameObject bullet;//’eŠÛ‚ğ’è‚ß‚éƒpƒuƒŠƒbƒN
-    public GameObject player;//ƒvƒŒƒCƒ„\‚ğİ’è
+    public GameObject bullet;//ï¿½eï¿½Û‚ï¿½ï¿½ß‚ï¿½pï¿½uï¿½ï¿½ï¿½bï¿½N
+    public GameObject player;//ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½\ï¿½ï¿½İ’ï¿½
     public EnemyManager enemyManager;
-    Vector2 targetPosition;//–Ú“I’n
-    Vector2 Straight;//Enemy‚Ìƒ|ƒWƒVƒ‡ƒ“    
+    Vector2 targetPosition;//ï¿½Ú“Iï¿½n
+    Vector2 Straight;//Enemyï¿½Ìƒ|ï¿½Wï¿½Vï¿½ï¿½ï¿½ï¿½    
     float duration = 0.3f;
     float t = 0.0f;
-    Vector2 basePosition;  // Šî€‚ÌˆÊ’u‚ğ•Û
+    Vector2 basePosition;  // ï¿½î€ï¿½ÌˆÊ’uï¿½ï¿½Ûï¿½
     bool Moveflag = true;
    
 
     void Start()
     {
-        player = GameObject.FindWithTag("Player");//ƒvƒŒƒCƒ„[‚ğ’T‚·                                         
-        basePosition = transform.position;  // ‰ŠúˆÊ’u‚ğŠî€ˆÊ’u‚Éİ’è
+
+        player = GameObject.FindWithTag("Player");//ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½Tï¿½ï¿½                                         
+        basePosition = transform.position;  // ï¿½ï¿½ï¿½ï¿½ï¿½Ê’uï¿½ï¿½ï¿½î€ï¿½Ê’uï¿½Éİ’ï¿½
     }
     void Update()
     {
@@ -32,18 +33,19 @@ public class EnemyScript : MonoBehaviour
         ManageState();       
     }
 
+
     void OnCollisionEnter(Collision collision)
     {
-        //ƒ^ƒO‚ğŒŸ’m‚µ‚ÄƒvƒŒƒCƒ„[‚ÌUŒ‚ƒ^ƒO‚¾‚Á‚½‚ç
+        //ï¿½^ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½mï¿½ï¿½ï¿½Äƒvï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ÌUï¿½ï¿½ï¿½^ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (collision.gameObject.CompareTag("ATK"))
         {
             //GetComponent<Player_Script>(Status);
             //EnemyHp = EnemyHp - playerATK;
-            //ƒXƒRƒA‰ÁZ
+            //ï¿½Xï¿½Rï¿½Aï¿½ï¿½ï¿½Z
 
-            //ƒAƒCƒeƒ€‚ğ‚Q•ª‚Ì‚P‚ÌŠm—¦‚Å¶¬
+            //ï¿½Aï¿½Cï¿½eï¿½ï¿½ï¿½ï¿½ï¿½Qï¿½ï¿½ï¿½Ì‚Pï¿½ÌŠmï¿½ï¿½ï¿½Åï¿½ï¿½ï¿½
 
-        //©g‚ğíœ,“¯‚É“G‚ÌoŒ»”‚ğ1Œ¸‚ç‚·
+        //ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½íœ,ï¿½ï¿½ï¿½ï¿½ï¿½É“Gï¿½Ìoï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½ï¿½ç‚·
         enemyManager.SpawnCount--;           
         Destroy(gameObject);
         }
@@ -64,38 +66,40 @@ public class EnemyScript : MonoBehaviour
    
     void ManageState()
     {
+
         Straight = new Vector2(transform.position.x, transform.position.y);
-                                             //üŠú@U•
+                                             //ï¿½ï¿½ï¿½ï¿½ï¿½@ï¿½Uï¿½ï¿½
         float yOffset = Mathf.Sin(Time.time * 3f) * 4.0f;
-        Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;//ƒ^[ƒQƒbƒg‚Æ‚Ì‹——£·‚ğo‚·
-        t = Mathf.Min(t, 1f);//n“_‚ÆI“_‚Ì^‚ñ’†      
+        Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;//ï¿½^ï¿½[ï¿½Qï¿½bï¿½gï¿½Æ‚Ì‹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½ï¿½
+        t = Mathf.Min(t, 1f);//ï¿½nï¿½_ï¿½ÆIï¿½_ï¿½Ì^ï¿½ï¿½      
         float speed = 0.5f;
         t += Time.deltaTime / duration;
 
         switch (EnemyState)
         {
-            case 0://’¼ü‚Å–Ú“I’n‚ÉŒü‚©‚¤B
+            case 0://ï¿½ï¿½ï¿½ï¿½ï¿½Å–Ú“Iï¿½nï¿½ÉŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
                
-                transform.Translate(direction * speed * Time.deltaTime);//’¼ü“IˆÚ“®
+                transform.Translate(direction * speed * Time.deltaTime);//ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½Ú“ï¿½
                 break;
 
-            case 1://”gó‚É–Ú“I’n‚ÉŒü‚©‚¤B
+            case 1://ï¿½gï¿½ï¿½É–Ú“Iï¿½nï¿½ÉŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
                
-                transform.position = new Vector2(transform.position.x, basePosition.y + yOffset);//”góˆÚ“®
-                transform.Translate(direction * speed * Time.deltaTime);//’¼ü“IˆÚ“®
+                transform.position = new Vector2(transform.position.x, basePosition.y + yOffset);//ï¿½gï¿½ï¿½Ú“ï¿½
+                transform.Translate(direction * speed * Time.deltaTime);//ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½Ú“ï¿½
                 break;
 
-            case 2://‹Èü‚Å–Ú“I’n‚ÉŒü‚©‚¤B
+            case 2://ï¿½Èï¿½ï¿½Å–Ú“Iï¿½nï¿½ÉŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
                 transform.position = Vector2.Lerp(transform.position, targetPosition, t);
                 if (EnemyState == 2 && Vector2.Distance(transform.position, targetPosition) < 0.1f)
                 {
                     Moveflag = true;
                     t = 0f;
-                    basePosition = transform.position; // Ÿ‚Ì”gó‚ÌŠî€“_‚É‚à‚È‚é
+                    basePosition = transform.position; // ï¿½ï¿½ï¿½Ì”gï¿½ï¿½ÌŠî€ï¿½_ï¿½É‚ï¿½ï¿½È‚ï¿½
                 }
 
                 break;
         }
+
        
     }
 }
