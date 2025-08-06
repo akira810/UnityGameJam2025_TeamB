@@ -6,7 +6,6 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public GameObject EnemyPrefab;//敵を定めるパブリック
-    public AudioClip sound;//出現時の効果音
     public GameObject player;    
     public float start;//始めにフラグを変えるタイミング
     public float interval;//フラグを再び変えるタイミング
@@ -17,6 +16,10 @@ public class EnemyManager : MonoBehaviour
     {
         //敵出現の間隔と最初の出現
         InvokeRepeating("Count", start, interval);
+    }
+    public void OnEnemyDestroyed()
+    {
+        SpawnCount--;
     }
     public void Count()
     {

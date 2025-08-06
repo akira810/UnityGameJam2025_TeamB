@@ -1,101 +1,94 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class EnemyScript : MonoBehaviour
 {
-    
-   int EnemyState = 0;
-    float EnemyHp = 100.0f;
-    public GameObject bullet;//�e�ۂ��߂�p�u���b�N
-    public GameObject player;//�v���C���\��ݒ�
+
+    int EnemyState = 0;
+    public GameObject bullet;//
+    public GameObject player;//
     public EnemyManager enemyManager;
-    Vector2 targetPosition;//�ړI�n
-    Vector2 Straight;//Enemy�̃|�W�V����    
+    Vector2 targetPosition;//   
     float duration = 0.3f;
     float t = 0.0f;
-    Vector2 basePosition;  // ��̈ʒu��ێ�
+    Vector2 basePosition;//自身のポジション変数
     bool Moveflag = true;
-   
+
 
     void Start()
     {
-        player = GameObject.FindWithTag("Player");//�v���C���[��T��                                         
-        basePosition = transform.position;  // �����ʒu���ʒu�ɐݒ�
+        //敵のマネージャーを探知する通知用変数
+        enemyManager = GameObject.FindObjectOfType<EnemyManager>();
+        //プレイヤーのタグを探知
+        player = GameObject.FindWithTag("Player");
+        //自分のポジションを変数に代入
+        basePosition = transform.position;
     }
     void Update()
     {
         MoveEnemy();
-        ManageState(); 
+        ManageState();
     }
-
-    void OnCollisionEnter(Collision collision)
+    private void OnDestroy()
     {
-        //�^�O����m���ăv���C���[�̍U���^�O��������
-        if (collision.gameObject.CompareTag("ATK"))
+        if (enemyManager != null)
         {
-            //GetComponent<Player_Script>(Status);
-            //EnemyHp = EnemyHp - playerATK;
-            //�X�R�A���Z
-
-            //�A�C�e����Q���̂P�̊m���Ő���
-
-        //���g��폜,�����ɓG�̏o������1���炷
-        enemyManager.SpawnCount--;           
-        Destroy(gameObject);
+            enemyManager.OnEnemyDestroyed();
         }
     }
-
+    void OnCollisionEnter(Collision collision)
+    {
+        //タグを検知してプレイヤーの攻撃タグだったら
+        if (collision.gameObject.CompareTag("ATK"))
+        {
+            //自身を削除
+            Destroy(gameObject);
+        }
+    }
     void MoveEnemy()
     {
+        //目的地のxyをランダムで決める
         if (Moveflag == true)
-        {
-            float x = Random.Range(-4.0f, 8.0f);
-            float y = Random.Range(-7.0f, 7.0f);
+        {   //xの位置をランダム決定
+            float x = Random.Range(929.0f, 938.0f);
+            //yの位置をランダムで決める
+            float y = Random.Range(548.0f, 538.0f);
 
             targetPosition = new Vector2(x, y);
             EnemyState = Random.Range(0, 3);
             Moveflag = false;
-        }       
+        }
     }
-   
+
     void ManageState()
     {
-        Straight = new Vector2(transform.position.x, transform.position.y);
-                                             //�����@�U��
+        //波長　振幅
         float yOffset = Mathf.Sin(Time.time * 3f) * 4.0f;
-        Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;//�^�[�Q�b�g�Ƃ̋�������o��
-        t = Mathf.Min(t, 1f);//�n�_�ƏI�_�̐^��      
+        Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;//
+        t = Mathf.Min(t, 1f);//カーブの中点     
         float speed = 0.5f;
         t += Time.deltaTime / duration;
 
         switch (EnemyState)
         {
-            case 0://�����ŖړI�n�Ɍ������B
-               
-                transform.Translate(direction * speed * Time.deltaTime);//�����I�ړ�
+            case 0://直線で発射
+                transform.Translate(direction * speed * Time.deltaTime);
                 break;
 
-            case 1://�g��ɖړI�n�Ɍ������B
-               
-                transform.position = new Vector2(transform.position.x, basePosition.y + yOffset);//�g��ړ�
-                transform.Translate(direction * speed * Time.deltaTime);//�����I�ړ�
+            case 1://波状に発射
+                transform.position = new Vector2(transform.position.x, basePosition.y + yOffset);
+                transform.Translate(direction * speed * Time.deltaTime);
                 break;
 
-            case 2://�Ȑ��ŖړI�n�Ɍ������B
+            case 2://曲線で発射
                 transform.position = Vector2.Lerp(transform.position, targetPosition, t);
                 if (EnemyState == 2 && Vector2.Distance(transform.position, targetPosition) < 0.1f)
                 {
-                    Moveflag = true;
-                    t = 0f;
-                    basePosition = transform.position; // ���̔g��̊�_�ɂ�Ȃ�
+                    Moveflag = true;//フラグリセット
+                    t = 0f;//カーブリセット
+                    basePosition = transform.position; // 位置を更新
                 }
-
                 break;
         }
-       
+
     }
 }

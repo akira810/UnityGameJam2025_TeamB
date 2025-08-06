@@ -15,7 +15,7 @@ public class BulletScript : MonoBehaviour
     public float flagstart;//始めにフラグを変えるタイミング
     public float flaginterval;//フラグを再び変えるタイミング
     public float desprn;//弾丸が消えるタイミング
-    private int BulletState;
+    private int BulletState;//ランダムに方向のステートを定める
     public Vector2 direction;//方向        
     bool bulletflag;
     void Start()
@@ -39,7 +39,7 @@ public class BulletScript : MonoBehaviour
             bulletflag = false;
         }
         Quaternion rotation = Quaternion.Euler(0f, 0f, 90f);//弾丸射出時の角度を９０度にしてまっすぐ出しているように見せる
-       //shellは発射物
+       //bulletは発射物
         GameObject bullet = Instantiate(bulletPrefab, transform.position, rotation);
         Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();//Rigidbodyを弾丸から取得して射出方向を決める
         bullet.GetComponent<Bullet>().SetDirection(direction);

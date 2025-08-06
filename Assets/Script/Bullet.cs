@@ -7,9 +7,7 @@ public class Bullet : MonoBehaviour
 {
     private Vector2 direction;
     private Rigidbody rd;
-    public float speed;
-    public GameObject player;
-    //public float EnemyAtk = 10.0f;
+    public float speed;   
     void Awake()
     {
       rd = GetComponent<Rigidbody>();
@@ -32,8 +30,6 @@ public class Bullet : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Player"))
         {
-          // GetComponent<Player_Script>();
-          //plaeyrHP=playerHP-ATK;
             Destroy(gameObject);
         }
 

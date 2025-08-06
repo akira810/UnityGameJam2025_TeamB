@@ -9,35 +9,31 @@ using UnityEngine.UIElements;
 
 public class Player_Script : MonoBehaviour
 {
-
-
     public float moveSpeed = 0.0f;
     float stickLx = 0.0f;
     float stickLy = 0.0f;
-
-    
+    public int playerHp;  
+    public int EnemyAtk;
     // Start is called before the first frame update
     void Start()
     {
-        InitCube();
+       
     }
-
     // Update is called once per frame
     void Update()
     {
-        MoveCube();      
-        
-        if (Input.GetKeyDown(KeyCode.J))
+        MoveCube();       
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+
+        //
+        if (collision.gameObject.CompareTag("Bullet"))
         {
-            
+            GetComponent<Rigidbody>();
+            playerHp = playerHp - EnemyAtk;
         }
     }
-
-    public void InitCube()
-    {
-              
-    }
-
     //ÉvÉåÉCÉÑÅ[ÇÃà⁄ìÆ
     public void MoveCube()
     {
