@@ -49,9 +49,9 @@ public class EnemyScript : MonoBehaviour
         //目的地のxyをランダムで決める
         if (Moveflag == true)
         {   //xの位置をランダム決定
-            float x = Random.Range(929.0f, 938.0f);
+            float x = Random.Range(-2.0f, 9.5f);
             //yの位置をランダムで決める
-            float y = Random.Range(548.0f, 538.0f);
+            float y = Random.Range(-4.0f, 6.0f);
 
             targetPosition = new Vector2(x, y);
             EnemyState = Random.Range(0, 3);
