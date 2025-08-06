@@ -4,38 +4,34 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class MoveBulletScript : MonoBehaviour
-{
-    [Serialize] public GameObject bullet;
-    ShotBulletScript shotScript;
-
-    GameObject newBullet;
-
-    public float moveSpeed;
-    public float destroyBulletSeconds;
-
-    // Start is called before the first frame update
-    void Start()
+{   
+    private Rigidbody rd;
+    public float speed;  
+    void Awake()
     {
-        shotScript = bullet.GetComponent<ShotBulletScript>();
+        rd = GetComponent<Rigidbody>();
     }
-
-    // Update is called once per frame
-    void Update()
+    //public void SetDirection(Vector2 dir)
+    //{
+    //    direction = dir.normalized;//弾丸が進む方向
+    //}
+    private void FixedUpdate()
     {
-        MoveBullet();
+        rd.velocity = Vector2.right * speed;
     }
-
-
-
-    public void MoveBullet()
+    void OnCollisionEnter(Collision collision)
     {
-        foreach (GameObject bullet in shotScript.bulletList)
+        //タグを検知してプレイヤーの攻撃タグだったら
+        if (collision.gameObject.CompareTag("Bullet"))
         {
-            if (bullet != null)
-            {
-                bullet.transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
-                Destroy(bullet, destroyBulletSeconds);
-            }
-        }        
+            //自身を削除
+            Destroy(gameObject);
+        }
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(gameObject);
+        }
+
     }
+
 }
